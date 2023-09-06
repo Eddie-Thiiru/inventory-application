@@ -2,16 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const TVSchema = new Schema({
-  brand: { type: String, required: true },
-  modelName: { type: String, required: true },
-  screenSize: { type: String, required: true },
+  brand: { type: Schema.Types.ObjectId, ref: "Brand", required: true },
+  model_name: { type: String, required: true },
+  screen_size: { type: String, required: true },
   resolution: { type: String, required: true },
-  refreshRate: { type: String, required: true },
-  specialFeatures: { type: String, required: true },
-  supportedInternetServices: { type: String, required: true },
-  releaseDate: { type: Date },
+  refresh_rate: { type: String, required: true },
+  special_features: { type: String, required: true },
+  supported_internet_services: { type: String, required: true },
+  release_date: { type: Date },
   price: { type: Number },
-  numberInStock: { type: Number },
+  number_in_stock: { type: Number },
+  category: [{ type: Schema.Types.ObjectId, ref: "Category" }],
 });
 
 TVSchema.virtual("url").get(function () {

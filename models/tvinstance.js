@@ -15,4 +15,4 @@ TVInstanceSchema.virtual("url").get(function () {
   return `/products/tvinstance/${this.id}`;
 });
 
-module.exports = mongoose.module("TVInstance", TVInstanceSchema);
+module.exports = mongoose.model("TVInstance", TVInstanceSchema);

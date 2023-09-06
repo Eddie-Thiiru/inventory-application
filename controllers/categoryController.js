@@ -5,10 +5,7 @@ const TV = require("../models/tv");
 
 // Display list of all categories
 exports.category_list = asyncHandler(async (req, res, next) => {
-  const allCategories = await Category.find({}, "name weight")
-    .sort({ weight: 1 })
-    .populate("name")
-    .exec();
+  const allCategories = await Category.find({}, "name").populate("name").exec();
 
   res.render("category_list", {
     title: "Category List",
@@ -20,13 +17,13 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 exports.category_detail = asyncHandler(async (req, res, next) => {
   const [category, tvsInCategory] = await Promise.all([
     Category.findById(req.params.id).exec(),
-    TV.find({ category: req.params.id }, "brand screenSize modelName").exec(),
+    TV.find({ category: req.params.id }, "brand screen_size model_name").exec(),
   ]);
 
   if (category === null) {
     const err = new Error("Category not found");
     err.status = 404;
-    next(err);
+    return next(err);
   }
 
   res.render("category_detail", {

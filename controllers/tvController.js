@@ -24,8 +24,8 @@ exports.index = asyncHandler(async (req, res, next) => {
 
 // Display list of all TVs
 exports.tv_list = asyncHandler(async (req, res, next) => {
-  const allTVs = await TV.find({}, "brand screenSize modelName")
-    .sort({ modelName: 1 })
+  const allTVs = await TV.find({}, "brand screen_size model_name")
+    .sort({ model_name: 1 })
     .exec();
 
   res.render("tv_list", { title: "TV List", tv_list: allTVs });
@@ -45,8 +45,24 @@ exports.tv_detail = asyncHandler(async (req, res, next) => {
   }
 
   res.render("tv_detail", {
-    title: `${tv.brand} ${tv.screenSize} ${tv.modelName}`,
+    title: `${tv.brand} ${tv.screen_size} ${tv.model_name}`,
     tv: tv,
     tv_instances: tvInstances,
   });
 });
+
+// // Display tv create form on GET
+// exports.tv_create_get = asyncHandler(async (req, res, next) => {
+//   const [allTVs, allCategories] = await Promise.all([
+//     TV.find().exec(),
+//     Category.find().exec(),
+//   ]);
+
+//   res.render("tv_form", {
+//     title: "Create TV",
+//     tvs: allTVs,
+//     categories: allCategories,
+//   });
+// });
+
+// Handle book create on POST
