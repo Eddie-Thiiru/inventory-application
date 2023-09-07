@@ -10,8 +10,8 @@ const TVSchema = new Schema({
   special_features: { type: String, required: true },
   supported_internet_services: { type: String, required: true },
   release_date: { type: Date },
-  price: { type: Number },
-  number_in_stock: { type: Number },
+  price: { type: Number, required: true },
+  number_in_stock: { type: Number, required: true },
   category: [{ type: Schema.Types.ObjectId, ref: "Category" }],
 });
 
