@@ -5,7 +5,7 @@ const TV = require("../models/tv");
 
 // Display list of all categories
 exports.category_list = asyncHandler(async (req, res, next) => {
-  const allCategories = await Category.find({}, "name").populate("name").exec();
+  const allCategories = await Category.find().exec();
 
   res.render("category_list", {
     title: "Category List",
@@ -17,7 +17,9 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 exports.category_detail = asyncHandler(async (req, res, next) => {
   const [category, tvsInCategory] = await Promise.all([
     Category.findById(req.params.id).exec(),
-    TV.find({ category: req.params.id }, "brand screen_size model_name").exec(),
+    TV.find({ category: req.params.id }, "brand screen_size model_name")
+      .populate("brand")
+      .exec(),
   ]);
 
   if (category === null) {

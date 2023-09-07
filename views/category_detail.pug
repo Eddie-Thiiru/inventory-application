@@ -4,9 +4,10 @@ block content
     .categoryDetail 
         h1 #{category.name}
         .categories
-            each tv in category_tvs
+            each tv, index in category_tvs
                 div 
-                    a(href=tv.url) #{tv.brand + tv.screen_size + tv.model_name} 
+                    a(href=tv.url) #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name}
+                    
                     
             else
                 p No Tvs in this category

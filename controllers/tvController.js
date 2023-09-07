@@ -30,7 +30,7 @@ exports.tv_list = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific TV
 exports.tv_detail = asyncHandler(async (req, res, next) => {
-  const tv = TV.findById(req.params.id)
+  const tv = await TV.findById(req.params.id)
     .populate("brand")
     .populate("category")
     .exec();
@@ -42,7 +42,6 @@ exports.tv_detail = asyncHandler(async (req, res, next) => {
   }
 
   res.render("tv_detail", {
-    title: `${tv.brand.name} ${tv.screen_size}-Inch  ${tv.model_name}`,
     tv: tv,
   });
 });

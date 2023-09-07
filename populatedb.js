@@ -4,14 +4,12 @@
 const userArgs = process.argv.slice(2);
 
 const TV = require("./models/tv");
-const TVInstance = require("./models/tvinstance");
 const Category = require("./models/category");
 const Brand = require("./models/brand");
 
 const categories = [];
 const brands = [];
 const tvs = [];
-const tvInstances = [];
 
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
@@ -27,7 +25,6 @@ async function main() {
   await createCategories();
   await createBrands();
   await createTVs();
-  await createTvInstances();
   console.log("Debug: Closing mongoose");
   mongoose.connection.close();
 }
@@ -81,17 +78,6 @@ async function tvCreate(
   console.log(`Added tv: ${tv.brand} ${tv.screen_size} ${tv.model_name}`);
 }
 
-async function tvInstanceCreate(index, tv, status) {
-  const tvInstanceDetail = { tv: tv };
-
-  if (status !== false) tvInstanceDetail.status = status;
-
-  const tvInstance = new TVInstance(tvInstanceDetail);
-  await tvInstance.save();
-  tvInstances[index] = tvInstance;
-  console.log(`Added tvinstance: ${tv}`);
-}
-
 async function createCategories() {
   console.log("Adding categories");
   await Promise.all([
@@ -99,7 +85,7 @@ async function createCategories() {
     categoryCreate(1, "QLED TVs"),
     categoryCreate(2, "OLED TVs"),
     categoryCreate(3, "4K TVs"),
-    categoryCreate(4, "8k TVs"),
+    categoryCreate(4, "8K TVs"),
   ]);
 }
 
@@ -130,7 +116,7 @@ async function createTVs() {
       "2023-3-13",
       1800,
       100,
-      [(categories[1], categories[3])]
+      [categories[1], categories[3]]
     ),
     tvCreate(
       1,
@@ -144,7 +130,7 @@ async function createTVs() {
       "2023-3-30",
       1500,
       200,
-      [(categories[2], categories[3])]
+      [categories[2], categories[3]]
     ),
     tvCreate(
       2,
@@ -158,12 +144,12 @@ async function createTVs() {
       "2022-3-27",
       1125,
       200,
-      [(categories[2], categories[3])]
+      [categories[2], categories[3]]
     ),
     tvCreate(
       3,
       brands[2],
-      "BRAVIA XR 8k MASTER SERIES Z9K",
+      "BRAVIA XR 8K MASTER SERIES Z9K",
       "85",
       "8K",
       "120 Hz",
@@ -172,7 +158,7 @@ async function createTVs() {
       "2022-3-26",
       6999,
       20,
-      [(categories[0], categories[4])]
+      [categories[0], categories[4]]
     ),
     tvCreate(
       4,
@@ -186,7 +172,7 @@ async function createTVs() {
       "2022-6-1",
       345,
       180,
-      [(categories[0], categories[3])]
+      [categories[0], categories[3]]
     ),
     tvCreate(
       5,
@@ -200,7 +186,7 @@ async function createTVs() {
       "2022-7-7",
       899,
       35,
-      [(categories[1], categories[3])]
+      [categories[1], categories[3]]
     ),
     tvCreate(
       6,
@@ -216,18 +202,5 @@ async function createTVs() {
       150,
       [categories[1]]
     ),
-  ]);
-}
-
-async function createTvInstances() {
-  console.log("Adding instances");
-  await Promise.all([
-    tvInstanceCreate(0, tvs[0], "Available"),
-    tvInstanceCreate(0, tvs[1], "Available"),
-    tvInstanceCreate(0, tvs[2], "Available"),
-    tvInstanceCreate(0, tvs[3], "Available"),
-    tvInstanceCreate(0, tvs[3], "Available"),
-    tvInstanceCreate(0, tvs[5], "Available"),
-    tvInstanceCreate(0, tvs[6], "Available"),
   ]);
 }

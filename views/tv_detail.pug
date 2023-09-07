@@ -2,7 +2,7 @@ extends layout
 
 block content
     .tvDetails 
-        h3 #{title}
+        h3 #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name}
         h2 About this item
         .tvMeta 
             div 
@@ -41,6 +41,6 @@ block content
                     each val in tv.category
                         a(href=val.url) #{val.name}
                     else 
-                        |,  
+                        | 
 
             
