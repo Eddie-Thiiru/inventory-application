@@ -12,7 +12,7 @@ const TVInstanceSchema = new Schema({
 });
 
 TVInstanceSchema.virtual("url").get(function () {
-  return `/products/tvinstance/${this.id}`;
+  return `/products/tvinstance/${this._id}`;
 });
 
 module.exports = mongoose.model("TVInstance", TVInstanceSchema);

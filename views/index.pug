@@ -3,3 +3,11 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  h2 Record Count 
+
+  ul 
+    li #[strong TVs:] !{tv_count}
+    li #[strong TV Copies:] !{tv_instance_count}
+    li #[strong TV Copies Available:] !{tv_instance_stock_count}
+    li #[strong TV Categories:] !{category_count}

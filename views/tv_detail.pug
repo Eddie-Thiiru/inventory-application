@@ -1,0 +1,63 @@
+extends layout 
+
+block content
+    .tvDetails 
+        h3 #{title}
+        h2 About this item
+        .tvMeta 
+            div 
+                h3 Screen Size
+                p #{tv.screen_size}
+            div 
+                h3 Brand
+                p #{tv.brand.name}
+            div 
+                h3 Special Features
+                p #{tv.special_features}
+            div 
+                h3 Internet Services
+                p #{tv.supported_internet_services}
+            div 
+                h3 Display Technology
+                p #{tv.display_technology}
+            div 
+                h3 Resolution
+                p #{tv.resolution}
+            div 
+                h3 Refresh Rate
+                p #{tv.refresh_rate}
+            div 
+                h3 Model Name
+                p #{tv.model_name}
+            div 
+                h3 Price
+                p #{tv.price}
+            div 
+                h3 Number In Stock 
+                p #{tv.number_in_stock}
+            div 
+                h3 Category
+                div 
+                    each val in tv.category
+                        a(href=val.url) #{val.name}
+                    else 
+                        |,  
+
+        .tvInstanceMeta
+            h2 Copies
+
+            each val in tv_instances
+                hr
+                if val.status=="Available"
+                    p.text-success #{val.status}
+                else if val.status=="Out of Stock"
+                    p.text-danger #{val.status}
+                else
+                    p.text-warning #{val.status}
+                p #[strong Id:]
+                    a(href=val.url) #{val._id}
+
+            else
+                p There are no copies of this tv in the store.
+                
+            

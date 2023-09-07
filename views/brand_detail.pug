@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+    .brandDetail 
+        h1 #{brand.name}
+        .brandProducts
+            each tv in brand_tvs
+                div 
+                    a(href=tv.url) #{brand.name + " " + tv.screen_size + "-Inch " + tv.model_name} 
+                    
+            else
+                p No TVs by this brand
+

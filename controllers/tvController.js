@@ -26,6 +26,7 @@ exports.index = asyncHandler(async (req, res, next) => {
 exports.tv_list = asyncHandler(async (req, res, next) => {
   const allTVs = await TV.find({}, "brand screen_size model_name")
     .sort({ model_name: 1 })
+    .populate("brand")
     .exec();
 
   res.render("tv_list", { title: "TV List", tv_list: allTVs });
@@ -34,8 +35,8 @@ exports.tv_list = asyncHandler(async (req, res, next) => {
 // Display detail page for a specific TV
 exports.tv_detail = asyncHandler(async (req, res, next) => {
   const [tv, tvInstances] = await Promise.all([
-    tv.findById(req.params.id).exec(),
-    tvInstances.find({ tv: req.params.id }).exec(),
+    TV.findById(req.params.id).populate("brand").populate("category").exec(),
+    TVInstance.find({ tv: req.params.id }).exec(),
   ]);
 
   if (tv === null) {
@@ -45,7 +46,7 @@ exports.tv_detail = asyncHandler(async (req, res, next) => {
   }
 
   res.render("tv_detail", {
-    title: `${tv.brand} ${tv.screen_size} ${tv.model_name}`,
+    title: `${tv.brand.name} ${tv.screen_size}-Inch  ${tv.model_name}`,
     tv: tv,
     tv_instances: tvInstances,
   });

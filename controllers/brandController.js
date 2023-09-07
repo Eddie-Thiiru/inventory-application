@@ -13,8 +13,8 @@ exports.brand_list = asyncHandler(async (req, res, next) => {
 // Display page for a specific Brand
 exports.brand_detail = asyncHandler(async (req, res, next) => {
   const [brand, allTvsByBrand] = await Promise.all([
-    Brand.findById(req.params.id).exec(),
-    TV.find({ brand: req.params.id }, "brand, screen_size, model_name").exec(),
+    Brand.findById(req.params.id).populate("name").exec(),
+    TV.find({ brand: req.params.id }, "screen_size model_name").exec(),
   ]);
 
   if (brand === null) {

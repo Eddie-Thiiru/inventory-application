@@ -1,0 +1,11 @@
+extends layout 
+
+block content 
+    .tvListContainer 
+        h1 TVs 
+        div(class="tvList")
+            each tv in tv_list 
+                div 
+                    a(href=tv.url) #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name}
+            else 
+                p There are no TVs

@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+
+    .brandListContainer 
+        h1 Brands 
+        .brandList
+            each brand in brand_list 
+                div 
+                    a(href=brand.url) #{brand.name}
+            else 
+                p There are no Brands 

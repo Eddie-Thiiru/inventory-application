@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+    .categoryDetail 
+        h1 #{category.name}
+        .categories
+            each tv in category_tvs
+                div 
+                    a(href=tv.url) #{tv.brand + tv.screen_size + tv.model_name} 
+                    
+            else
+                p No Tvs in this category
+
