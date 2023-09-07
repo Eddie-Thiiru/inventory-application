@@ -4,7 +4,6 @@ const router = express.Router();
 const tv_controller = require("../controllers/tvController");
 const brand_controller = require("../controllers/brandController");
 const category_controller = require("../controllers/categoryController");
-const tv_instance_controller = require("../controllers/tvinstanceController");
 
 /// TV ROUTES ///
 
@@ -68,43 +67,5 @@ router.get("/category/:id", category_controller.category_detail);
 
 // POST request for list of all Category
 router.get("/categories/", category_controller.category_list);
-
-/// TVINSTANCE ROUTES ///
-
-// // GET request for creating a TVInstance
-// router.get("/category/create", tv_instance_controller.tvinstance_create_get);
-
-// // POST request for creating a TVInstance
-// router.post("/category/create", tv_instance_controller.tvinstance_create_post);
-
-// // GET request to delete TVInstance
-// router.get(
-//   "/category/:id/delete",
-//   tv_instance_controller.tvinstance_delete_get
-// );
-
-// // POST request to delete TVInstance
-// router.post(
-//   "/category/:id/delete",
-//   tv_instance_controller.tvinstance_delete_post
-// );
-
-// // GET request to update TVInstance
-// router.get(
-//   "/category/:id/update",
-//   tv_instance_controller.tvinstance_update_get
-// );
-
-// // POST request to update TVInstance
-// router.post(
-//   "/category/:id/update",
-//   tv_instance_controller.tvinstance_update_post
-// );
-
-// GET request for one TVInstance
-router.get("/tvinstance/:id", tv_instance_controller.tvinstance_detail);
-
-// POST request for list of all TVInstance
-router.get("/tvinstances/", tv_instance_controller.tvinstance_list);
 
 module.exports = router;

@@ -43,21 +43,4 @@ block content
                     else 
                         |,  
 
-        .tvInstanceMeta
-            h2 Copies
-
-            each val in tv_instances
-                hr
-                if val.status=="Available"
-                    p.text-success #{val.status}
-                else if val.status=="Out of Stock"
-                    p.text-danger #{val.status}
-                else
-                    p.text-warning #{val.status}
-                p #[strong Id:]
-                    a(href=val.url) #{val._id}
-
-            else
-                p There are no copies of this tv in the store.
-                
             

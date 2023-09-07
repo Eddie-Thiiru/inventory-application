@@ -2,22 +2,18 @@ const asyncHandler = require("express-async-handler");
 
 const TV = require("../models/tv");
 const Category = require("../models/category");
-const TVInstance = require("../models/tvinstance");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  const [numTVs, numTVInstances, numTVsInStock, numCategories] =
-    await Promise.all([
-      TV.countDocuments({}).exec(),
-      TVInstance.countDocuments({}).exec(),
-      TVInstance.countDocuments({ status: "Available" }).exec(),
-      Category.countDocuments({}).exec(),
-    ]);
+  const [numTVs, numTVsInStock, numCategories] = await Promise.all([
+    TV.countDocuments({}).exec(),
+    TV.countDocuments().populate("number_in_stock").exec(),
+    Category.countDocuments({}).exec(),
+  ]);
 
   res.render("index", {
     title: "Home",
     tv_count: numTVs,
-    tv_instance_count: numTVInstances,
-    tv_instance_stock_count: numTVsInStock,
+    tv_stock_count: numTVsInStock,
     category_count: numCategories,
   });
 });
@@ -34,10 +30,10 @@ exports.tv_list = asyncHandler(async (req, res, next) => {
 
 // Display detail page for a specific TV
 exports.tv_detail = asyncHandler(async (req, res, next) => {
-  const [tv, tvInstances] = await Promise.all([
-    TV.findById(req.params.id).populate("brand").populate("category").exec(),
-    TVInstance.find({ tv: req.params.id }).exec(),
-  ]);
+  const tv = TV.findById(req.params.id)
+    .populate("brand")
+    .populate("category")
+    .exec();
 
   if (tv === null) {
     const err = new Error("TV not found");
@@ -48,7 +44,6 @@ exports.tv_detail = asyncHandler(async (req, res, next) => {
   res.render("tv_detail", {
     title: `${tv.brand.name} ${tv.screen_size}-Inch  ${tv.model_name}`,
     tv: tv,
-    tv_instances: tvInstances,
   });
 });
 
