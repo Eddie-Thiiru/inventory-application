@@ -8,6 +8,7 @@ const indexRouter = require("./routes/index");
 const productsRouter = require("./routes/products");
 
 const compression = require("compression");
+const helmet = require("helmet");
 
 const app = express();
 
@@ -31,9 +32,8 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(helmet());
 app.use(compression()); // Compress routes
-
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
