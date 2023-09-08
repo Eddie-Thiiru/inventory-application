@@ -12,10 +12,12 @@ const helmet = require("helmet");
 
 const app = express();
 
+require("dotenv").config();
+
 const RateLimit = require("express-rate-limit");
 const limiter = RateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 20,
+  max: 30,
 });
 
 app.use(limiter);
@@ -24,8 +26,7 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
 // Set up mongoose connection
-const mongoDB =
-  "mongodb+srv://eddiewachaga:AV0KlJvsA3BPgLXW@cluster0.yzd0gvt.mongodb.net/tv_store?retryWrites=true&w=majority";
+const mongoDB = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_KEY}@cluster0.yzd0gvt.mongodb.net/tv_store?retryWrites=true&w=majority`;
 
 main().catch((err) => console.log(err));
 async function main() {
