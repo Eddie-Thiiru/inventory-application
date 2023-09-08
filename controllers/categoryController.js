@@ -79,7 +79,7 @@ exports.category_create_post = [
 
 // Display category update form on GET
 exports.category_update_get = asyncHandler(async (req, res, next) => {
-  const category = await Category.findById(req.params.id);
+  const category = await Category.findById(req.params.id).exec();
 
   if (category === null) {
     const err = new Error("Category not found");
@@ -123,8 +123,10 @@ exports.category_update_post = [
 // Display category delete form on Get
 exports.category_delete_get = asyncHandler(async (req, res, next) => {
   const [category, tvsInCategory] = await Promise.all([
-    category.findById(req.params.id).populate("name").exec(),
-    TV.find({ category: req.params.id }, "screen_size model_name").exec(),
+    Category.findById(req.params.id).populate("name").exec(),
+    TV.find({ category: req.params.id }, "brand screen_size model_name")
+      .populate("brand")
+      .exec(),
   ]);
 
   if (category === null) {
@@ -141,7 +143,7 @@ exports.category_delete_get = asyncHandler(async (req, res, next) => {
 // Handle category delete on POST
 exports.category_delete_post = asyncHandler(async (req, res, next) => {
   const [category, tvsInCategory] = await Promise.all([
-    category.findById(req.params.id).populate("name").exec(),
+    Category.findById(req.params.id).populate("name").exec(),
     TV.find({ category: req.params.id }, "screen_size model_name").exec(),
   ]);
 
@@ -153,7 +155,7 @@ exports.category_delete_post = asyncHandler(async (req, res, next) => {
     });
     return;
   } else {
-    await Category.findByIdAndRemove(req.body.id);
+    await Category.findByIdAndRemove(req.params.id);
     res.redirect("/products/categories");
   }
 });

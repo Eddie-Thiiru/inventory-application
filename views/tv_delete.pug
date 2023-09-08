@@ -1,0 +1,19 @@
+extends layout 
+
+block content 
+    .tvDelete
+        h1=title 
+        h2 #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name}
+
+        div
+            p #[strong Brand: ] #{tv.brand.name}
+            p #[strong Resolution: ] #{tv.resolution}
+            p #[strong Special Features: ] #{tv.special_features}
+            p #[strong Price: ] #{tv.price}
+            p #[strong Number In Stock: ] #{tv.number_in_stock}
+
+        div 
+            form(method="POST" action="") 
+                .tvDeleteFormGroup 
+                    input#tvDelete.form-control(type="hidden" name="tvDelete" required="true" value=tv._id)
+                button(class="deleteTvBtn" type="submit") Delete 

@@ -17,30 +17,24 @@ router.get("/tv/create", tv_controller.tv_create_get);
 router.post("/tv/create", tv_controller.tv_create_post);
 
 // GET request to update TV
-router.get("tv/:id/update", tv_controller.tv_update_get);
+router.get("/tv/:id/update", tv_controller.tv_update_get);
 
 // POST request to update TV
-router.get("tv/:id/update", tv_controller.tv_update_post);
+router.post("/tv/:id/update", tv_controller.tv_update_post);
 
 // GET request to delete TV
-router.get("tv/:id/delete", tv_controller.tv_delete_get);
+router.get("/tv/:id/delete", tv_controller.tv_delete_get);
 
 // POST request to delete TV
-router.post("tv/:id/delete", tv_controller.tv_delete_post);
+router.post("/tv/:id/delete", tv_controller.tv_delete_post);
 
 // GET request for one TV
 router.get("/tv/:id", tv_controller.tv_detail);
 
 // GET request for list of all TVs
-router.get("/tvs", tv_controller.tv_list);
+router.get("/tvs/", tv_controller.tv_list);
 
 /// BRAND ROUTES ///
-
-// GET request for one Brand
-router.get("/brand/:id", brand_controller.brand_detail);
-
-// GET request for list of all Brands
-router.get("/brands", brand_controller.brand_list);
 
 // GET request for creating a Brand
 router.get("/brand/create", brand_controller.brand_create_get);
@@ -49,16 +43,22 @@ router.get("/brand/create", brand_controller.brand_create_get);
 router.post("/brand/create", brand_controller.brand_create_post);
 
 // GET request for updating a Brand
-router.get("/brand/update", brand_controller.brand_update_get);
+router.get("/brand/:id/update", brand_controller.brand_update_get);
 
 // POST request for updating a Brand
-router.post("/brand/update", brand_controller.brand_update_post);
+router.post("/brand/:id/update", brand_controller.brand_update_post);
 
 // GET request for deleting a Brand
-router.get("/brand/create", brand_controller.brand_delete_get);
+router.get("/brand/:id/delete", brand_controller.brand_delete_get);
 
 // POST request for deleting a Brand
-router.post("/brand/create", brand_controller.brand_delete_post);
+router.post("/brand/:id/delete", brand_controller.brand_delete_post);
+
+// GET request for one Brand
+router.get("/brand/:id", brand_controller.brand_detail);
+
+// GET request for list of all Brands
+router.get("/brands/", brand_controller.brand_list);
 
 /// CATEGORY ROUTES ///
 

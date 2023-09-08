@@ -2,7 +2,7 @@ extends layout
 
 block content 
     .brandDetail 
-        h1 #{brand.name}
+        h1 #{brand.name} TVs
         .brandProducts
             each tv in brand_tvs
                 div 
@@ -10,4 +10,9 @@ block content
                     
             else
                 p No TVs by this brand
+        hr  
+        p 
+            a(href=brand.url + "/update") Update Brand
+        p 
+            a(href=brand.url + "/delete") Delete Brand
 

@@ -74,7 +74,7 @@ exports.brand_create_post = [
 
 // Display brand update form on GET
 exports.brand_update_get = asyncHandler(async (req, res, next) => {
-  const brand = await Brand.findById(req.body.id);
+  const brand = await Brand.findById(req.params.id).exec();
 
   if (brand === null) {
     const err = new Error("Brand not found");
@@ -145,7 +145,7 @@ exports.brand_delete_post = asyncHandler(async (req, res, next) => {
     });
     return;
   } else {
-    await Brand.findByIdAndRemove(req.body.id);
-    res.redirect("products/brands");
+    await Brand.findByIdAndRemove(req.params.id);
+    res.redirect("/products/brands");
   }
 });

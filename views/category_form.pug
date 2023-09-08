@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    .categoryForm 
+        h1=title
+
+        form(method="POST" action="")
+            .categoryFormGroup 
+                label(for="categoryName") Category Name:
+                input#categoryName.form-control(type="text" name="name" required="true" value=(undefined===category? "" : category.name))
+            button(class="createCategoryBtn" type="submit") Submit 
+        
+        if errors 
+            ul 
+                for error in errors 
+                    li!=error.msg 

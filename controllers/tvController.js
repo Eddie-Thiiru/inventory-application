@@ -51,7 +51,7 @@ exports.tv_detail = asyncHandler(async (req, res, next) => {
 // Display tv create form on GET
 exports.tv_create_get = asyncHandler(async (req, res, next) => {
   const [allBrands, allCategories] = await Promise.all([
-    Brand.find.exec(),
+    Brand.find().exec(),
     Category.find().exec(),
   ]);
 
@@ -132,7 +132,7 @@ exports.tv_create_post = [
 
     if (!errors.isEmpty()) {
       const [allBrands, allCategories] = await Promise.all([
-        Brand.find.exec(),
+        Brand.find().exec(),
         Category.find().exec(),
       ]);
 
@@ -162,8 +162,8 @@ exports.tv_create_post = [
 // Display tv update form on GET
 exports.tv_update_get = asyncHandler(async (req, res, next) => {
   const [tv, allBrands, allCategories] = await Promise.all([
-    TV.find().exec(),
-    Brand.find.exec(),
+    TV.findById(req.params.id).exec(),
+    Brand.find().exec(),
     Category.find().exec(),
   ]);
 
@@ -184,7 +184,7 @@ exports.tv_update_get = asyncHandler(async (req, res, next) => {
   }
 
   res.render("tv_form", {
-    title: "Create TV",
+    title: "Update TV",
     brands: allBrands,
     categories: allCategories,
     tv: tv,
@@ -258,13 +258,14 @@ exports.tv_update_post = [
       release_date: req.body.release_date,
       price: req.body.price,
       number_in_stock: req.body.number_in_stock,
-      category: req.body.category,
+      category:
+        typeof req.body.category === "undefined" ? [] : req.body.category,
       _id: req.params.id,
     });
 
     if (!errors.isEmpty()) {
       const [allBrands, allCategories] = await Promise.all([
-        Brand.find.exec(),
+        Brand.find().exec(),
         Category.find().exec(),
       ]);
 
@@ -285,7 +286,7 @@ exports.tv_update_post = [
 
       return;
     } else {
-      await tv.findByIdAndUpdate(req.params.id, tv);
+      await TV.findByIdAndUpdate(req.params.id, tv);
       res.redirect(tv.url);
     }
   }),
@@ -302,7 +303,7 @@ exports.tv_delete_get = asyncHandler(async (req, res, next) => {
     res.redirect("/products/tvs");
   }
 
-  render("tv_delete", { title: "Delete TV", tv: tv });
+  res.render("tv_delete", { title: "Delete TV", tv: tv });
 });
 
 // Handle tv delete on POST

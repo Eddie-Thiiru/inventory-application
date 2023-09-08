@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    .brandForm 
+        h1=title
+
+        form(method="POST" action="")
+            .brandFormGroup
+                label(for="brandName") Brand Name:
+                input#brandName.form-control(type="text" name="name" required="true" value=(undefined===brand? "" : brand.name)) 
+            button(class="createBrandBtn" type="submit") Submit
+
+        if errors 
+            ul 
+                for error in errors 
+                    li!=error.msg

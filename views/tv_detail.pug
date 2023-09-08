@@ -38,9 +38,15 @@ block content
             div 
                 h3 Category
                 div 
-                    each val in tv.category
+                    each val, index in tv.category
                         a(href=val.url) #{val.name}
-                    else 
-                        | 
+                        if index < tv.category.length - 1
+                            |,
+        hr
+        p 
+            a(href=tv.url + "/update") Update TV 
+        p 
+            a(href=tv.url + "/delete") Delete TV
+
 
             
