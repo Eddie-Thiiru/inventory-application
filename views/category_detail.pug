@@ -4,6 +4,7 @@ block content
     .categoryDetail 
         h1 #{category.name}
         .categories
+            - category_tvs.sort(function(a, b) {let textA = a.brand.name.toUpperCase(); let textB = b.brand.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0}) 
             each tv, index in category_tvs
                 div 
                     a(href=tv.url) #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name}
@@ -11,8 +12,9 @@ block content
                     
             else
                 p No Tvs in this category
-        hr
-        p 
+
+        .updateDeleteLinks
             a(href=category.url + "/update") Update Category 
-        p 
             a(href=category.url + "/delete") Delete Category
+     
+           

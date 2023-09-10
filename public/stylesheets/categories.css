@@ -1,0 +1,36 @@
+.categoryListContainer,
+.categoryDetail,
+.categoryForm,
+.categoryDelete {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryList {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.categoryList div {
+  padding: 10px;
+}
+
+.categories {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.categories div {
+  padding: 10px;
+}
+
+.categoryDelete {
+  align-items: center;
+}

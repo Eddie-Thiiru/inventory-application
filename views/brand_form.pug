@@ -1,10 +1,10 @@
 extends layout 
 
 block content 
-    .brandForm 
+    .brandFormContainer
         h1=title
 
-        form(method="POST" action="")
+        form(method="POST" action="" class="brandCreateForm")
             .brandFormGroup
                 label(for="brandName") Brand Name:
                 input#brandName.form-control(type="text" name="name" required="true" value=(undefined===brand? "" : brand.name)) 

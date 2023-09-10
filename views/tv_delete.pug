@@ -5,14 +5,24 @@ block content
         h1=title 
         h2 #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name}
 
-        div
-            p #[strong Brand: ] #{tv.brand.name}
-            p #[strong Resolution: ] #{tv.resolution}
-            p #[strong Special Features: ] #{tv.special_features}
-            p #[strong Price: ] #{tv.price}
-            p #[strong Number In Stock: ] #{tv.number_in_stock}
+        .tvMeta 
+            div 
+                h3 Brand
+                p #{tv.brand.name}
+            div 
+                h3 Resolution
+                p #{tv.resolution}
+            div 
+                h3 Special Features
+                p #{tv.special_features}    
+            div 
+                h3 Price
+                p #{tv.price}
+            div 
+                h3 Number In Stock 
+                p #{tv.number_in_stock}
 
-        div 
+        .formDeleteContainer
             form(method="POST" action="") 
                 .tvDeleteFormGroup 
                     input#tvDelete.form-control(type="hidden" name="tvDelete" required="true" value=tv._id)

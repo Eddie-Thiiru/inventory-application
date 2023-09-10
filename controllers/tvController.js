@@ -6,16 +6,18 @@ const Brand = require("../models/brand");
 const Category = require("../models/category");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  const [numTVs, numTVsInStock, numCategories] = await Promise.all([
+  const [numTVs, numTVsInStock, numBrands, numCategories] = await Promise.all([
     TV.countDocuments({}).exec(),
-    TV.countDocuments().populate("number_in_stock").exec(),
+    TV.countDocuments().where("number_in_stock").gt(0).exec(),
+    Brand.countDocuments({}).exec(),
     Category.countDocuments({}).exec(),
   ]);
 
   res.render("index", {
-    title: "Home",
+    title: "Inventory",
     tv_count: numTVs,
     tv_stock_count: numTVsInStock,
+    brand_count: numBrands,
     category_count: numCategories,
   });
 });
@@ -23,7 +25,6 @@ exports.index = asyncHandler(async (req, res, next) => {
 // Display list of all TVs
 exports.tv_list = asyncHandler(async (req, res, next) => {
   const allTVs = await TV.find({}, "brand screen_size model_name")
-    .sort({ model_name: 1 })
     .populate("brand")
     .exec();
 
@@ -303,7 +304,7 @@ exports.tv_delete_get = asyncHandler(async (req, res, next) => {
     res.redirect("/products/tvs");
   }
 
-  res.render("tv_delete", { title: "Delete TV", tv: tv });
+  res.render("tv_delete", { title: "Delete", tv: tv });
 });
 
 // Handle tv delete on POST

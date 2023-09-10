@@ -6,14 +6,14 @@ block content
         h2 #{brand.name}
 
         if brand_tvs.length
-            p #[strong Delete the following TVs before removing this brand.]
+            p #[strong Delete the following TVs before removing this brand!]
 
-            div 
-                h3 TVs 
-                div 
-                    each tv in brand_tvs 
-                         a(href=tv.url) #{brand.name + " " + tv.screen_size + "-Inch " + tv.model_name} 
+            div(class="brandProducts") 
+                each tv in brand_tvs 
+                    a(href=tv.url) #{brand.name + " " + tv.screen_size + "-Inch " + tv.model_name} 
         else
+            p Are you sure you want to delete this brand?
+            p Click the button below to delete
             form(method="POST" action="")
                 .brandDeleteFormGroup 
                     input#brandDelete.form-control(type="hidden" name="brandDelete" required="true" value=brand._id)

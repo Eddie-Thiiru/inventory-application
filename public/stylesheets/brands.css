@@ -1,0 +1,36 @@
+.brandListContainer,
+.brandDetail,
+.brandFormContainer,
+.brandDelete {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.brandList {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.brandList div {
+  padding: 10px;
+}
+
+.brandProducts {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.brandProducts div {
+  padding: 10px;
+}
+
+.brandDelete {
+  align-items: center;
+}

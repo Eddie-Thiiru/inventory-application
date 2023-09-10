@@ -6,7 +6,10 @@ const TV = require("../models/tv");
 
 // Display list of all Brands
 exports.brand_list = asyncHandler(async (req, res, next) => {
-  const allBrands = await Brand.find().exec();
+  const allBrands = await Brand.find()
+    .collation({ locale: "en" })
+    .sort({ name: 1 })
+    .exec();
 
   res.render("brand_list", { title: "Brand List", brand_list: allBrands });
 });

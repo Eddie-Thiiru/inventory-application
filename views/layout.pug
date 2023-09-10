@@ -4,27 +4,29 @@ html
     title= title
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')  
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/index.css')
+    link(rel="stylesheet", href="/stylesheets/header.css")
+    link(rel="stylesheet", href="/stylesheets/sidebar.css")
+    link(rel="stylesheet", href="/stylesheets/home.css")
+    link(rel="stylesheet", href="/stylesheets/products.css")
+    link(rel="stylesheet", href="/stylesheets/brands.css")
+    link(rel="stylesheet", href="/stylesheets/categories.css")
   body
     div(class='app')
+        div(class="header")
+          block header        
+            h1 TV Store
+            nav(class='headerNav')               
+                a(href='/products') Home          
+                a(href='/products/tvs') Products          
+                a(href='/products/brands') Brands
+                a(href='/products/categories') Categories
+
         div(class='sidebar')
           block sidebar
-            ul(class='sidebarNav')
-              li
-                a(href='/products') Home
-              li
-                a(href='/products/tvs') All TVs
-              li
-                a(href='/products/brands') All Brands
-              li
-                a(href='/products/categories') All Categories
-              li
-                hr
-              li
+            nav(class="sidebarNav")  
                 a(href='/products/brand/create') Create new brand
-              li
                 a(href='/products/category/create') Create new category
-              li
                 a(href='/products/tv/create') Create new tv
 
         div(class='main')

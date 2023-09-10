@@ -4,6 +4,7 @@ block content
     .tvListContainer 
         h1 TVs 
         div(class="tvList")
+            - tv_list.sort(function(a, b) {let textA = a.brand.name.toUpperCase(); let textB = b.brand.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0}) 
             each tv in tv_list 
                 div 
                     a(href=tv.url) #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name}

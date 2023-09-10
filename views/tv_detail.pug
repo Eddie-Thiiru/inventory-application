@@ -2,8 +2,7 @@ extends layout
 
 block content
     .tvDetails 
-        h3 #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name}
-        h2 About this item
+        h1 #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name}
         .tvMeta 
             div 
                 h3 Screen Size
@@ -17,9 +16,6 @@ block content
             div 
                 h3 Internet Services
                 p #{tv.supported_internet_services}
-            div 
-                h3 Display Technology
-                p #{tv.display_technology}
             div 
                 h3 Resolution
                 p #{tv.resolution}
@@ -37,16 +33,16 @@ block content
                 p #{tv.number_in_stock}
             div 
                 h3 Category
-                div 
+                div(class="tvCategory") 
                     each val, index in tv.category
                         a(href=val.url) #{val.name}
                         if index < tv.category.length - 1
                             |,
-        hr
-        p 
+        .updateDeleteLinks 
             a(href=tv.url + "/update") Update TV 
-        p 
             a(href=tv.url + "/delete") Delete TV
+       
+            
 
 
             

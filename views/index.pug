@@ -1,12 +1,23 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-
-  h2 Record Count 
-
-  ul 
-    li #[strong TVs:] !{tv_count}
-    li #[strong TV Copies Available:] !{tv_stock_count}
-    li #[strong TV Categories:] !{category_count}
+  .homeSection
+    h1= title
+    .homeSectionContent
+      .homeContentHeader
+        h2 Record 
+        h2 Count
+      .records 
+        div 
+          h3 Total Products
+          p !{tv_count}
+        div 
+          h3 TVs In Stock
+          p !{tv_stock_count}
+        div 
+          h3 Brands
+          p !{brand_count}
+        div 
+          h3 Categories
+          p !{category_count}
+  
