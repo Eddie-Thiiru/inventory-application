@@ -1,4 +1,6 @@
 .header {
+  color: white;
+  background-color: #062239;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;

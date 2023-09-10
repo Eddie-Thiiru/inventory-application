@@ -6,15 +6,17 @@ block content
         h2 #{category.name}
 
         if category_tvs.length
-            p #[strong Delete the following TVs before removing this category!]
+            p 
+                span Delete the following TVs before removing this category!
 
             div(class="categories")
                 each tv in category_tvs 
                     a(href=tv.url) #{tv.brand.name + " " + tv.screen_size + "-Inch " + tv.model_name} 
         else
-            p Are you sure you want to delete this category?
+            p 
+                span Are you sure you want to delete this category?
             p Click the button below to delete
             form(method="POST" action="")
                 .categoryDeleteFormGroup 
                     input#categoryDelete.form-control(type="hidden" name="categoryDelete" required="true" value=category._id)
-                button(class="deleteCategoryBtn" type="submit") Delete 
+                button(class="deleteBtn" type="submit") Delete 

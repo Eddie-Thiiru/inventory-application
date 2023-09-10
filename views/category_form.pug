@@ -8,7 +8,7 @@ block content
             .categoryFormGroup 
                 label(for="categoryName") Category Name:
                 input#categoryName.form-control(type="text" name="name" required="true" value=(undefined===category? "" : category.name))
-            button(class="createCategoryBtn" type="submit") Submit 
+            button(class="createBtn" type="submit") Submit 
         
         if errors 
             ul 

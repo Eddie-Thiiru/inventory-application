@@ -20,3 +20,8 @@
   justify-items: center;
   align-items: center;
 }
+
+.records p {
+  color: red;
+  font-weight: 600;
+}
